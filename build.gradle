@@ -22,12 +22,28 @@ dependencies {
     // https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.10.0'
    
-    // https://mvnrepository.com/artifact/io.github.bonigarcia/webdrivermanager
-    implementation 'io.github.bonigarcia:webdrivermanager:5.5.3'
+// https://mvnrepository.com/artifact/io.github.bonigarcia/webdrivermanager
+implementation group: 'io.github.bonigarcia', name: 'webdrivermanager', version: '5.8.0'
 
-    // https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java
-    implementation 'org.seleniumhq.selenium:selenium-java:4.14.0'
+// https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java
+implementation group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '4.19.1'
 
+    // https://mvnrepository.com/artifact/org.testng/testng
+testImplementation group: 'org.testng', name: 'testng', version: '7.10.0'
+
+
+}
+
+
+test {
+    useTestNG() {
+        suites 'src/test/resources/testng.xml'
+    }
+
+    testLogging {
+        showStandardStreams = true
+        events "passed", "skipped", "failed"
+    }
 }
 
 //task startScript(type:Exec) {
