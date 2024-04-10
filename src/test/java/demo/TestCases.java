@@ -5,6 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 
@@ -40,8 +41,6 @@ public class TestCases {
     @Test
     public  void testCase02(){
         System.out.println("Start Test case: testCase02");
-        // // Navigate to YouTube Website
-        // driver.get("https://www.youtube.com/");
         // verifying the Current URL using Assert Statements
         Assert.assertTrue(driver.getCurrentUrl().equals("https://www.youtube.com/"), "Unverified URL");
         System.out.println("Verified Link: URL: \"https://www.youtube.com/\" ");
@@ -63,5 +62,48 @@ public class TestCases {
         System.out.println("end Test case: testCase02");
     }
 
+    @Test
+    public void testCase03() throws InterruptedException{
+        System.out.println("Start Test case: testCase03");
+        SoftAssert softassert = new SoftAssert();
 
+        driver.navigate().back();
+
+        WebElement moviesSection = driver.findElement(By.xpath("//yt-formatted-string[text()='Movies']"));
+        SeleniumWrapper.clickAction(moviesSection, driver);
+
+        WebElement moviesTextElement = driver.findElement(By.xpath("//span[text()='Movies']"));
+        String moviesText = moviesTextElement.getText();
+
+
+        softassert.assertEquals(moviesText, "Movies");
+
+        Thread.sleep(2000);
+
+        WebElement rightArrowbtn = driver.findElement(By.xpath("(//ytd-button-renderer[@class='style-scope yt-horizontal-list-renderer arrow'])[2]"));
+        // Loop until the element disappears
+        while (rightArrowbtn.isDisplayed()) {
+            // Click on the element
+            rightArrowbtn.click();
+
+            Thread.sleep(1000);
+
+        }
+
+        WebElement A_Rating = driver.findElement(By.xpath("(//p[text()='A'])[3]"));
+
+        String A_Rating_txt = A_Rating.getText();
+
+        softassert.assertEquals(A_Rating_txt, "A");
+
+        System.out.println("Verified Maturity for the Movie : "+A_Rating_txt);
+
+        WebElement movieGenere = driver.findElement(By.xpath("(//span[contains(text(), 'Comedy')])[3]"));
+
+        String movieGeneretxt = movieGenere.getText();
+
+        softassert.assertTrue(movieGeneretxt.contains("Comedy"), "Unverified Genre");
+
+        System.out.println("Verified Genre for the Movie : "+movieGeneretxt);
+    }
 }
