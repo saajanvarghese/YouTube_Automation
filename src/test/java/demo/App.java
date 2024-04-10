@@ -18,6 +18,7 @@ public class App {
         tests.testCase01();
         tests.testCase02();
         tests.testCase03();
+        tests.testCase04();
 
         //END Tests
 
