@@ -1,8 +1,14 @@
 package demo;
 
+import java.time.Duration;
+import java.util.List;
+
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
@@ -160,5 +166,73 @@ public class TestCases {
 
         System.out.println("end Test case: testCase04");
 
+    }
+
+    @Test
+    public void testCase05() throws InterruptedException{
+
+        System.out.println("Start Test case: testCase05");
+
+        SoftAssert softassert = new SoftAssert();
+
+        driver.navigate().back();
+
+        Thread.sleep(3000);
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//a[@id='endpoint']//yt-formatted-string[text()='News']")));
+
+        WebElement newsSection = driver.findElement(By.xpath("//a[@id='endpoint']//yt-formatted-string[text()='News']"));
+        SeleniumWrapper.clickAction(newsSection, driver);
+
+        WebElement moviesTextElement = driver.findElement(By.xpath("//span[@class='yt-core-attributed-string yt-core-attributed-string--white-space-pre-wrap']"));
+        String moviesText = moviesTextElement.getText();
+
+        softassert.assertEquals(moviesText, "News");
+
+        Thread.sleep(2000);
+
+        WebElement Headline_1 = driver.findElement(By.xpath("(//yt-formatted-string[@id='home-content-text']//span)[1]"));
+        String Headline_1_txt = Headline_1.getText();
+
+        System.out.println("Headline 1 :"+Headline_1_txt);
+
+        WebElement Headline_2 = driver.findElement(By.xpath("(//yt-formatted-string[@id='home-content-text']//span)[2]"));
+        String Headline_2_txt = Headline_2.getText();
+
+        System.out.println("\n Headline 2 :"+Headline_2_txt);
+
+        WebElement Headline_3 = driver.findElement(By.xpath("(//span[@dir='auto'])[4]"));
+        String Headline_3_txt = Headline_3.getText();
+
+        System.out.println("\n Headline 3 :"+Headline_3_txt);
+
+        double result = 0;
+
+        WebElement HeadLine_1_Like_count = driver.findElement(By.xpath("(//span[@id='vote-count-middle'])[1]"));
+
+        String getHeadLine_1_Like_count = HeadLine_1_Like_count.getText();
+
+        WebElement HeadLine_2_Like_count = driver.findElement(By.xpath("(//span[@id='vote-count-middle'])[2]"));
+
+        String getHeadLine_2_Like_count = HeadLine_2_Like_count.getText();
+
+        WebElement HeadLine_3_Like_count = driver.findElement(By.xpath("(//span[@id='vote-count-middle'])[2]"));
+
+        String getHeadLine_3_Like_count = HeadLine_3_Like_count.getText();
+
+        if (getHeadLine_3_Like_count.contains("k")) {
+            result = Double.parseDouble(getHeadLine_3_Like_count.replace("k", "")) * 1000;
+        }
+
+        
+        int like_count_1 = Integer.parseInt(getHeadLine_1_Like_count);
+        int like_count_2 = Integer.parseInt(getHeadLine_2_Like_count);
+        int like_count_3 = Integer.parseInt(getHeadLine_3_Like_count);
+
+        int result_likes = like_count_1 + like_count_2 + like_count_3;
+
+        System.out.println("Total Count of Likes : "+ result_likes);
     }
 }
