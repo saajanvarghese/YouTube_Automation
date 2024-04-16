@@ -44,7 +44,7 @@ public class TestCases extends ExcelDataProvider {
         System.out.println("end Test case: testCase01");
     }
 
-    //@Test(enabled = true)
+    @Test(enabled = true)
     public  void testCase02(){
         System.out.println("Start Test case: testCase02");
 
@@ -72,7 +72,7 @@ public class TestCases extends ExcelDataProvider {
         System.out.println("end Test case: testCase02");
     }
 
-    //@Test(enabled = true)
+    @Test(enabled = true)
     public void testCase03() throws InterruptedException{
         System.out.println("Start Test case: testCase03");
         SoftAssert softassert = new SoftAssert();
@@ -242,7 +242,7 @@ public class TestCases extends ExcelDataProvider {
     }
 
 
-    //@Test(enabled = true, dataProvider = "excelData")
+    @Test(enabled = true, dataProvider = "excelData")
     public void testCase06(String Search_Keyword) throws InterruptedException {
         System.out.println("Start Test case: testCase06");
 

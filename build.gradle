@@ -55,13 +55,4 @@ test {
     }
 }
 
-
-//task startScript(type:Exec) {
-//    commandLine './selenium-run.sh'
-//}
-
-//run.dependsOn startScript
-
-//test.dependsOn startScript
-
 mainClassName = 'demo.App'
