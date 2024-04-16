@@ -28,6 +28,15 @@ implementation group: 'io.github.bonigarcia', name: 'webdrivermanager', version:
 // https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java
 implementation group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '4.19.1'
 
+// https://mvnrepository.com/artifact/org.apache.poi/poi-ooxml
+implementation group: 'org.apache.poi', name: 'poi-ooxml', version: '5.2.5'
+
+// https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-core
+implementation group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.23.1'
+
+// https://mvnrepository.com/artifact/org.apache.poi/poi
+implementation group: 'org.apache.poi', name: 'poi', version: '5.2.5'
+
     // https://mvnrepository.com/artifact/org.testng/testng
 testImplementation group: 'org.testng', name: 'testng', version: '7.10.0'
 
@@ -45,6 +54,7 @@ test {
         events "passed", "skipped", "failed"
     }
 }
+
 
 //task startScript(type:Exec) {
 //    commandLine './selenium-run.sh'

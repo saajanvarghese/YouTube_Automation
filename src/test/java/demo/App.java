@@ -5,6 +5,7 @@ package demo;
 import java.net.MalformedURLException;
 
 
+
 public class App {
     public void getGreeting() throws InterruptedException, MalformedURLException {
         
@@ -20,6 +21,7 @@ public class App {
         tests.testCase03();
         tests.testCase04();
         tests.testCase05();
+        tests.testCase06("Movies");
 
         //END Tests
 

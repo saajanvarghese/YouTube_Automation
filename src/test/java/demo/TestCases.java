@@ -16,7 +16,7 @@ import org.testng.asserts.SoftAssert;
 import io.github.bonigarcia.wdm.WebDriverManager;
 
 
-public class TestCases {
+public class TestCases extends ExcelDataProvider {
     ChromeDriver driver;
     public TestCases()
     {
@@ -34,7 +34,7 @@ public class TestCases {
 
     }
 
-    @Test
+    @Test(enabled = true)
     public void testCase01() {
         System.out.println("Start Test case: testCase01");
         // Navigate to YouTube Website
@@ -44,7 +44,7 @@ public class TestCases {
         System.out.println("end Test case: testCase01");
     }
 
-    @Test
+    @Test(enabled = true)
     public  void testCase02(){
         System.out.println("Start Test case: testCase02");
 
@@ -72,7 +72,7 @@ public class TestCases {
         System.out.println("end Test case: testCase02");
     }
 
-    @Test
+    @Test(enabled = true)
     public void testCase03() throws InterruptedException{
         System.out.println("Start Test case: testCase03");
         SoftAssert softassert = new SoftAssert();
@@ -120,7 +120,7 @@ public class TestCases {
         System.out.println("end Test case: testCase03");
     }
 
-    @Test
+    @Test(enabled = true)
     public void testCase04() throws InterruptedException{
 
         System.out.println("Start Test case: testCase04");
@@ -168,7 +168,7 @@ public class TestCases {
 
     }
 
-    @Test
+    @Test(enabled = true)
     public void testCase05() throws InterruptedException{
 
         System.out.println("Start Test case: testCase05");
@@ -234,5 +234,51 @@ public class TestCases {
         int result_likes = like_count_1 + like_count_2 + like_count_3;
 
         System.out.println("Total Count of Likes : "+ result_likes);
+    }
+
+
+    @Test(enabled = true, dataProvider = "excelData")
+    public void testCase06(String Search_Keyword) throws InterruptedException {
+        System.out.println("Start Test case: testCase06");
+
+        driver.get("https://www.youtube.com/");
+
+        driver.navigate().back();
+
+        Thread.sleep(3000);
+
+        WebElement searchBox = driver.findElement(By.xpath("//input[@id='search']"));
+
+        SeleniumWrapper.clickAction(searchBox, driver);
+
+        SeleniumWrapper.enterText(searchBox, Search_Keyword);
+
+        WebElement searchBoxClick = driver.findElement(By.id("search-icon-legacy"));
+
+        SeleniumWrapper.clickAction(searchBoxClick, driver);
+        List<WebElement> viewsList = driver.findElements(By.xpath("//span[contains(text(), 'views')]"));
+
+        int actual_count = 0;
+        String getViewCount = "";
+
+        for (WebElement viewCount : viewsList) {
+            String viewcountString = viewCount.getText();
+            if (viewcountString.contains("M views")) {
+                getViewCount = viewcountString.replace("M views", "");
+            }
+            if (viewcountString.contains("K views")) {
+                getViewCount = viewcountString.replace("K views", "");
+            }
+            // String getViewCount = viewcountString.replace("M views", "");
+            float numericviewCount = Float.parseFloat(getViewCount);
+            actual_count += numericviewCount;
+
+            if (actual_count >= 10000000) { // Checking if the total count reaches 10 million
+                actual_count = 10000000; // Cap the count to 10 million
+                break; // Exit the loop since the target has been reached
+            }
+        }
+
+        System.out.println("Actual Count:" + actual_count);
     }
 }
