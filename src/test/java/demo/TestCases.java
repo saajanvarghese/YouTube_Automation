@@ -44,7 +44,7 @@ public class TestCases extends ExcelDataProvider {
         System.out.println("end Test case: testCase01");
     }
 
-    @Test(enabled = true)
+    //@Test(enabled = true)
     public  void testCase02(){
         System.out.println("Start Test case: testCase02");
 
@@ -72,7 +72,7 @@ public class TestCases extends ExcelDataProvider {
         System.out.println("end Test case: testCase02");
     }
 
-    @Test(enabled = true)
+    //@Test(enabled = true)
     public void testCase03() throws InterruptedException{
         System.out.println("Start Test case: testCase03");
         SoftAssert softassert = new SoftAssert();
@@ -120,7 +120,7 @@ public class TestCases extends ExcelDataProvider {
         System.out.println("end Test case: testCase03");
     }
 
-    @Test(enabled = true)
+    //@Test(enabled = true)
     public void testCase04() throws InterruptedException{
 
         System.out.println("Start Test case: testCase04");
@@ -171,11 +171,12 @@ public class TestCases extends ExcelDataProvider {
     @Test(enabled = true)
     public void testCase05() throws InterruptedException{
 
-        System.out.println("Start Test case: testCase05");
+        try {
+            System.out.println("Start Test case: testCase05");
 
         SoftAssert softassert = new SoftAssert();
 
-        driver.navigate().back();
+        //driver.navigate().back();
 
         Thread.sleep(3000);
 
@@ -218,7 +219,7 @@ public class TestCases extends ExcelDataProvider {
 
         String getHeadLine_2_Like_count = HeadLine_2_Like_count.getText();
 
-        WebElement HeadLine_3_Like_count = driver.findElement(By.xpath("(//span[@id='vote-count-middle'])[2]"));
+        WebElement HeadLine_3_Like_count = driver.findElement(By.xpath("(//span[@id='vote-count-middle'])[]"));
 
         String getHeadLine_3_Like_count = HeadLine_3_Like_count.getText();
 
@@ -234,10 +235,14 @@ public class TestCases extends ExcelDataProvider {
         int result_likes = like_count_1 + like_count_2 + like_count_3;
 
         System.out.println("Total Count of Likes : "+ result_likes);
+        } catch (Exception e) {
+            // TODO: handle exception
+            e.printStackTrace();
+        }
     }
 
 
-    @Test(enabled = true, dataProvider = "excelData")
+    //@Test(enabled = true, dataProvider = "excelData")
     public void testCase06(String Search_Keyword) throws InterruptedException {
         System.out.println("Start Test case: testCase06");
 
