@@ -25,7 +25,7 @@ Go to “News” tab and print the title and body of the 1st 3 “Latest News Po
 # TestCase 06 Description
 Search for each of the items given in this excel sheet (Read them using Apache POI), and keep scrolling till the sum of each video’s views reach 10 Cr.
 
-# Note on This Flipkart Automation Project
+# Note on This YouTube Automation Project
 1. Added Selenium Wrapper Methods
 2. Added TestNG
 3. Implemented Soft Assert
